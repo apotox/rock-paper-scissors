@@ -9,6 +9,7 @@ export default class Engine {
     setIntervalHandler: any;
     ctx: CanvasRenderingContext2D;
     client: Client = null;
+    // texts
     texts =  {
         title: 'RPS',
         counter: 0,

@@ -8,6 +8,7 @@ export default class Counter implements Entity {
     x: number;
     y: number;
     value: number = 0;
+    visible?: boolean = true;
 
     constructor(id: string, x: number, y: number) {
         console.log('draw counter')
@@ -19,6 +20,7 @@ export default class Counter implements Entity {
     }
 
     draw (engine: Engine) {
+        if(!this.visible) return
         const ctx = engine.ctx
         ctx.save()
         ctx.font = '20px pixel';

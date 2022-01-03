@@ -1,6 +1,6 @@
 import Engine from "../engine";
 import { Entity, GameSystem } from "../types";
-
+import Counter from '../entities/counter'
 
 
 export default class CounterSystem implements GameSystem {
@@ -21,11 +21,12 @@ export default class CounterSystem implements GameSystem {
         }
     }
 
-    func(engine: Engine, entity: Entity & {value: number}) {
+    func(engine: Engine, entity: Counter) {
 
         
         if(engine.texts.gameStatus == 'PRE-STARTED'){
             if(!this.started){
+                entity.visible = true
                 this.started= true
                 this.currentValue = Number(engine.texts.counter)
                 this.coundDown()
@@ -34,6 +35,9 @@ export default class CounterSystem implements GameSystem {
                 entity.value = this.currentValue
             }
             
+        }else {
+            entity.value = 0
+            entity.visible = false
         }
 
     }

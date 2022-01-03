@@ -12,6 +12,7 @@ export interface Entity {
     x: number;
     y: number;
     onTouched?: () => void;
+    visible?: boolean;
 }
 
 
