@@ -6,9 +6,6 @@ const app = express();
 const server = require('http').createServer(app);
 const IO = require('socket.io')(server);
 
-
-
-
 const gameInstance = new GameApp(IO);
 
 
