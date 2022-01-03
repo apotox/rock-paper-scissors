@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document 2</title>
+    
+</head>
+<body>
+
+    <style>
+        @font-face {
+            font-family: pixel;
+            src: url("https://dl.dropboxusercontent.com/s/hsdwvz761xqphhb/pixel.ttf");
+        }
+        body, html {
+            background-color: black;
+            padding: 0;
+            margin: 0;
+        }
+        #game {
+        }
+
+        .game-resources {
+            height: 0;
+            overflow: hidden;
+        }
+    </style>
+
+    <canvas id="game" width="240" height="320" ></canvas>
+
+    <script async>
+        const game = document.getElementById('game')
+        game.width = window.innerWidth
+        game.height = window.innerHeight
+    </script>
+   
+
+
+    <div class="game-resources">
+        <img id='paper' src="assets/paper.png"  />
+        <img id='rock' src="assets/rock.png"  />
+        <img id='scissors' src="assets/scissors.png"  />
+    </div>
+
+
+    <script src="lib/game.js"></script>
+
+    
+    
+    
+</body>
+</html>
