@@ -26,3 +26,7 @@ export enum Images {
     paper = 'paper',
     scissors = 'scissors'
 }
+
+export type EngineVariables = {
+    [key: string]: any;
+}
