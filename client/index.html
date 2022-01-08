@@ -26,9 +26,73 @@
             height: 0;
             overflow: hidden;
         }
+        .create-new-game p {
+            text-align: center;
+            font-size: 14px;
+            
+            color: #E69A8DFF;
+            line-height: normal;
+        }
+        .create-new-game{
+            visibility: hidden;
+            font-family: pixel;
+            background-color: #5F4B8BFF;
+            color: #E69A8DFF;
+            border: 2px solid #ccc;
+            position: absolute;
+            border-radius: 8px;
+            margin: auto 8px;
+            height: 50vh;
+            top: 20vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 2px 0px 0px #818181;
+        }
+        .create-new-game input {
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin: 1rem;
+            background-color: transparent;
+            padding: 0.4rem;
+            color: #fff;
+            text-align: center;
+            font-family: inherit;
+            
+        }
+
+        button {
+            font-family: inherit;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin: 1rem;
+            background-color: #E69A8DFF;
+            padding: 0.4rem;
+
+            color: #fff;
+        }
+        button:hover{
+            background-color: rgb(199, 113, 98);
+        }
     </style>
 
     <canvas id="game" width="240" height="320" ></canvas>
+
+    
+    <div class="create-new-game" id="create-new-game">
+        <p>welcome to rps! share this link with your oppnenmnt to play in realtime</p>
+        <input readonly aria-selected="true" type="text" value="https://asdsdfsdf" id="shared-link"/>
+        <button onclick="copyToClip()">Click to copy and refresh</button>
+    </div>
+
+    <script>
+        function copyToClip(){
+            var textBox = document.getElementById("shared-link");
+            textBox.select();
+            document.execCommand("copy");
+            window.location.reload()
+        }
+    </script>
+
 
     <script async>
         const game = document.getElementById('game')
@@ -39,9 +103,9 @@
 
 
     <div class="game-resources">
-        <img id='paper' src="assets/paper.png"  />
-        <img id='rock' src="assets/rock.png"  />
-        <img id='scissors' src="assets/scissors.png"  />
+        <img id='paper' src="assets/paper.png"  alt="paper"/>
+        <img id='rock' src="assets/rock.png"  alt="rock"/>
+        <img id='scissors' src="assets/scissors.png"  alt="scissors"/>
     </div>
 
 
