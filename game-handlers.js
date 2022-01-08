@@ -44,9 +44,10 @@ const joinRoomHandler = function(socket, data){
         this.rooms[roomId] = this.rooms[roomId] || {
             id: roomId,
             users: [],
-            status: 'none',
+            status: GAME_STATUSES.WAITING,
             gameResult: {},
-            finalResult: null
+            finalResult: null,
+            startIn: GAME_START_TIME / 1000,
         }
 
         // check room status
@@ -70,29 +71,31 @@ const joinRoomHandler = function(socket, data){
         if(this.rooms[roomId].users.length === 2) {
 
             process.nextTick(() => {
-                // send pre-start status to let the client show the counte down
-                this.sendToRoom(roomId,'game-status', {
-                    roomId: roomId,
-                    users: this.rooms[roomId].users,
-                    date: new Date(),
-                    startIn: GAME_START_TIME / 1000,
-                    status: GAME_STATUSES.PRESTARTED
-                })
-
+                
                 this.rooms[roomId].status = GAME_STATUSES.PRESTARTED;
-
-
-                setTimeout(()=>{
-                    this.rooms[roomId].status = GAME_STATUSES.STARTED;
+                //start a count down
+                const startInInterval = setInterval(() => {
                     this.sendToRoom(roomId,'game-status', {
-                        status: GAME_STATUSES.STARTED
-                    });
-                }, GAME_START_TIME);
-
+                        roomId: roomId,
+                        users: this.rooms[roomId].users,
+                        startIn: this.rooms[roomId].startIn,
+                        status: GAME_STATUSES.PRESTARTED
+                    })
+                    this.rooms[roomId].startIn--;
+                    if(this.rooms[roomId].startIn < 0) {
+                        clearInterval(startInInterval);
+                        this.rooms[roomId].status = GAME_STATUSES.STARTED;
+                        this.sendToRoom(roomId,'game-status', {
+                            status: GAME_STATUSES.STARTED,
+                            gameLifeTime: GAME_LIFE_TIME,
+                        })
+                    }
+                } , 1000)
 
                 // finish the game after GAME_START_TIME + GAME_LIFE_TIME since this
                 // is the time we need to get the winner
                 setTimeout(()=>{
+                    if(!this.rooms[roomId]) return
                     this.rooms[roomId].status = GAME_STATUSES.FINISHED;
                     this.rooms[roomId].finalResult = getWinner(this.rooms[roomId].gameResult);
                     this.sendToRoom(roomId,'game-status', {
@@ -107,7 +110,7 @@ const joinRoomHandler = function(socket, data){
         }
         
         
-        if(this.rooms[roomId].status != 'none'){
+        if(this.rooms[roomId].status !=  GAME_STATUSES.WAITING){
             console.log('already ', this.rooms[roomId].status);
         }
 
