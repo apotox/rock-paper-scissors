@@ -1,5 +1,6 @@
 
 
+import Engine from "../engine";
 import { Entity, Images } from "../types";
 
 const BUTTON_WIDTH = 24;
@@ -12,10 +13,11 @@ export default class Button implements Entity {
     y: number;
     self: Button = this
 
-    draw(engine) {
+    draw(engine: Engine) {
+        if(engine.variables.gameStatus !== 'STARTED') return
         const ctx = engine.canvas.getContext('2d');
         if (this.backgroudImageId) {
-            const img = document.getElementById(this.backgroudImageId)
+            const img = document.getElementById(this.backgroudImageId) as CanvasImageSource;
             ctx.drawImage(img, this.x - (  BUTTON_WIDTH / 2 ), this.y - (BUTTON_HEIGHT / 2), BUTTON_WIDTH, BUTTON_HEIGHT);
         }
     }

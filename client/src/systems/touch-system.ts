@@ -13,7 +13,7 @@ export default class TouchSystem implements GameSystem {
 
 
     func(engine: Engine, entity: Entity){
-
+        if(engine.variables.gameStatus !== 'STARTED') return
         if(Math.abs(entity.x - this.lastTouchedPosition.x) < TOUCH_AREA_WIDTH && Math.abs(entity.y - this.lastTouchedPosition.y) < TOUCH_AREA_WIDTH){
           
             this.lastTouchedPosition.x = 0
@@ -27,7 +27,7 @@ export default class TouchSystem implements GameSystem {
             ctx.fill();
 
 
-            engine.texts.title = entity.id
+            engine.variables.title = entity.id
 
             entity.onTouched()
 
@@ -45,7 +45,7 @@ export default class TouchSystem implements GameSystem {
            
             const x = e.touches[0].clientX;
             const y = e.touches[0].clientY;
-            console.log(x,y)
+            // console.log(x,y)
 
             this.lastTouchedPosition.x = x;
             this.lastTouchedPosition.y = y;
