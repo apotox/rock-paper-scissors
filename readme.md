@@ -1,4 +1,4 @@
-a rock paper scissors realtime game
+a rock paper scissors realtime game (for smartphone only)
 
 [Demo](https://rock-paper-scissors-rt.herokuapp.com/)
 
