@@ -30,6 +30,7 @@ export default class Client {
 
         this.socket.on("disconnect", () => {
             console.log('disconnected'); // true
+            this.id = null
             this.connected = false;
         });
 
