@@ -7,14 +7,21 @@ import Client from "./socket-client";
 import Counter from "./entities/counter";
 import CounterSystem from "./systems/counter-system";
 
-
+const BASE_URL = 'http://localhost:3000';
 
 (async () => {
 
     const roomId = window.location.hash.substr(1)
 
-    console.log('roomId', roomId)
+    if(!roomId) {
+        const randomId = Math.random().toString(36).substr(2, 5)
+        window.location.hash = randomId
+        document.getElementById('shared-link').setAttribute('value',`${BASE_URL}/#${randomId}` )
+        document.getElementById('create-new-game').style.visibility = 'visible'
+        return
+    }
 
+    console.log('roomId', roomId)
     const client = new Client(roomId || 'default');
 
     //load fonts
