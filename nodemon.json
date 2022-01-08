@@ -1,0 +1,5 @@
+{
+    "ext": "js",
+    "exec": "node app.js",
+    "ignore": ["client", "readme.md"] 
+}
