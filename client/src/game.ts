@@ -7,7 +7,7 @@ import Client from "./socket-client";
 import Counter from "./entities/counter";
 import CounterSystem from "./systems/counter-system";
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = window.location.protocol + '//' + window.location.host;
 
 (async () => {
 
@@ -21,7 +21,6 @@ const BASE_URL = 'http://localhost:3000';
         return
     }
 
-    console.log('roomId', roomId)
     const client = new Client(roomId || 'default');
 
     //load fonts
