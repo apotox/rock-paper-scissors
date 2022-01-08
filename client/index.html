@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document 2</title>
+    <title>Rock Paper Scissors | GAME</title>
     
 </head>
 <body>
@@ -27,6 +27,7 @@
             overflow: hidden;
         }
         .create-new-game p {
+            margin: 1rem;
             text-align: center;
             font-size: 14px;
             
@@ -73,15 +74,24 @@
         button:hover{
             background-color: rgb(199, 113, 98);
         }
+        .github {
+            margin-top: auto;
+            padding: 1rem;
+            text-align: center;
+            color: #fff;
+            text-decoration: none;
+        }
     </style>
 
     <canvas id="game" width="240" height="320" ></canvas>
 
     
     <div class="create-new-game" id="create-new-game">
-        <p>welcome to rps! share this link with your oppnenmnt to play in realtime</p>
+        <p>Welcome to rps! <br/> share this link with your oppnenmnt to play in realtime</p>
         <input readonly aria-selected="true" type="text" value="https://asdsdfsdf" id="shared-link"/>
         <button onclick="copyToClip()">Click to copy and refresh</button>
+
+        <a class="github" target="_blank" href='https://github.com/apotox/rock-paper-scissors'>Github</a>
     </div>
 
     <script>
