@@ -1,10 +1,12 @@
 const path = require('path');
 
+const isDev = process.env.NODE_ENV !== 'production';
+console.log('webpack mode', isDev ? 'development' : 'production');
 module.exports = {
     context: path.resolve(__dirname, 'src'),
-    devtool: 'inline-source-map',
+    devtool: isDev ? 'inline-source-map': undefined,
     entry: './game.ts',
-    mode: 'development',
+    mode: isDev ? 'development': 'production',
     module: {
         rules: [{
             test: /\.ts?$/,
