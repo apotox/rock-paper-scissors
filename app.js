@@ -13,7 +13,8 @@ app.get('/rooms', (req, res) => res.json(gameInstance.getRooms()))
 
 app.use(express.static('client'));
 const {PORT = 3000} = process.env;
+
 server.listen(PORT, ()=>{
-    console.log('listening on port 3000');
+    console.log('Listening on port: ', PORT);
 });
 
