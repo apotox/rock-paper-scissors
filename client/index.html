@@ -9,6 +9,11 @@
 </head>
 <body>
 
+    <div class="loading">
+        <p>loading...</p>
+    </div>
+
+
     <style>
         @font-face {
             font-family: pixel;
@@ -81,8 +86,22 @@
             color: #fff;
             text-decoration: none;
         }
+        .loading {
+            color: #fff;
+            font-family: pixel, sans-serif;
+            font-size: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
+            width: 100%;
+            height: 100vh;
+            background-color: #e69a8d;
+        }
     </style>
 
+    
     <canvas id="game" width="240" height="320" ></canvas>
 
     

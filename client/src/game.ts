@@ -11,6 +11,12 @@ const BASE_URL = window.location.protocol + '//' + window.location.host;
 
 (async () => {
 
+    //load fonts
+    await document.fonts.load("120px pixel")
+    console.log('font loaded');
+
+
+
     const roomId = window.location.hash.substr(1)
 
     if(!roomId) {
@@ -22,13 +28,7 @@ const BASE_URL = window.location.protocol + '//' + window.location.host;
     }
 
     const client = new Client(roomId || 'default');
-
-    //load fonts
-    await document.fonts.load("120px pixel")
-    console.log('font loaded')
-
     const engine = new Engine(canvas, client)
-
 
     const space = CANVAS_W / 4
 
@@ -38,13 +38,12 @@ const BASE_URL = window.location.protocol + '//' + window.location.host;
 
     //add counter
     engine.addEntity(new Counter('counter', 0, CANVAS_H / 20))
-
     engine.addSystem(new TouchSystem())
     engine.addSystem(new CounterSystem())
 
-    engine.start()
+    engine.start();
 
-
-
+    // hide the loading screen
+    (document.getElementsByClassName("loading")[0] as HTMLElement).style.display = "none";
 
 })()
