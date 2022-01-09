@@ -12,10 +12,10 @@ export default class TouchSystem implements GameSystem {
 
 
 
-    func(engine: Engine, entity: Entity){
-        if(engine.variables.gameStatus !== 'STARTED') return
-        if(Math.abs(entity.x - this.lastTouchedPosition.x) < TOUCH_AREA_WIDTH && Math.abs(entity.y - this.lastTouchedPosition.y) < TOUCH_AREA_WIDTH){
-          
+    func(engine: Engine, entity: Entity) {
+        if (engine.variables.gameStatus !== 'STARTED') return
+        if (Math.abs(entity.x - this.lastTouchedPosition.x) < TOUCH_AREA_WIDTH && Math.abs(entity.y - this.lastTouchedPosition.y) < TOUCH_AREA_WIDTH) {
+
             this.lastTouchedPosition.x = 0
             this.lastTouchedPosition.y = 0
 
@@ -37,19 +37,31 @@ export default class TouchSystem implements GameSystem {
             })
         }
     }
+
+
+    handleClick(e: any) {
+        console.log('handleClick')
+        let x;
+        let y;
+        if (e instanceof TouchEvent) {
+            x = e.touches[0].clientX;
+            y = e.touches[0].clientY;
+        } else {
+            x = e.clientX;
+            y = e.clientY;
+        }
+        
+        console.log(x, y)
+        this.lastTouchedPosition.x = x;
+        this.lastTouchedPosition.y = y;
+    }
     constructor() {
         this.name = 'touch';
 
-        document.getElementsByTagName('body')[0].addEventListener('touchstart', (e) => {
-            console.log('touchstart')
-           
-            const x = e.touches[0].clientX;
-            const y = e.touches[0].clientY;
-            // console.log(x,y)
+        const body = document.getElementsByTagName('body')[0];
 
-            this.lastTouchedPosition.x = x;
-            this.lastTouchedPosition.y = y;
-        })
+        body.addEventListener('touchstart', this.handleClick.bind(this));
+        body.addEventListener('mousedown', this.handleClick.bind(this));
 
     }
 }
