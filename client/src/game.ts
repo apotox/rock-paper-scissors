@@ -9,6 +9,10 @@ import CounterSystem from "./systems/counter-system";
 
 const BASE_URL = window.location.protocol + '//' + window.location.host;
 
+const hideLoadingScreen = () => {
+    (document.getElementsByClassName("loading")[0] as HTMLElement).style.display = "none";
+}
+
 (async () => {
 
     //load fonts
@@ -23,7 +27,9 @@ const BASE_URL = window.location.protocol + '//' + window.location.host;
         const randomId = Math.random().toString(36).substr(2, 5)
         window.location.hash = randomId
         document.getElementById('shared-link').setAttribute('value',`${BASE_URL}/#${randomId}` )
-        document.getElementById('create-new-game').style.visibility = 'visible'
+        document.getElementById('create-new-game').style.visibility = 'visible';
+        // hide the loading screen
+        hideLoadingScreen();
         return
     }
 
@@ -44,6 +50,6 @@ const BASE_URL = window.location.protocol + '//' + window.location.host;
     engine.start();
 
     // hide the loading screen
-    (document.getElementsByClassName("loading")[0] as HTMLElement).style.display = "none";
+    hideLoadingScreen();
 
 })()
