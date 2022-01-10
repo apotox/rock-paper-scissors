@@ -11,7 +11,7 @@ const BASE_URL = window.location.protocol + '//' + window.location.host;
 
 const hideLoadingScreen = () => {
     (document.getElementsByClassName("loading")[0] as HTMLElement).style.display = "none";
-}
+};
 
 (async () => {
 
@@ -26,8 +26,23 @@ const hideLoadingScreen = () => {
     if(!roomId) {
         const randomId = Math.random().toString(36).substr(2, 5)
         window.location.hash = randomId
-        document.getElementById('shared-link').setAttribute('value',`${BASE_URL}/#${randomId}` )
+        const url = `${BASE_URL}/#${randomId}`
+        document.getElementById('shared-link').setAttribute('value', url)
         document.getElementById('create-new-game').style.visibility = 'visible';
+
+
+        // generate qr code image
+        if(Object.hasOwnProperty.call(window, 'QRCode')) {
+            new (window as any).QRCode(document.getElementById("qr-container") , {
+                width: 128,
+                height: 128,
+                text: url,
+                colorDark : "#fff",
+                colorLight : "#5F4B8BFF",
+            });
+        }
+
+        
         // hide the loading screen
         hideLoadingScreen();
         return
